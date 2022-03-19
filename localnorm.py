@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 from scipy.spatial import distance
 from scipy.stats import spearmanr
@@ -11,10 +5,7 @@ from scipy.stats import pearsonr
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0, 1))
-
-
-# In[2]:
-
+import gensim.models.keyedvectors as word2vec
 
 def getWordmap(textfile):
     words={}
@@ -46,7 +37,7 @@ def get_localnorm(We):
     return lnweight4ind
 
 def sim_evaluate_all(We, words, weight4ind, scoring_function, m):
-    prefix = "../data/"
+    prefix = "datasets/"
     parr = []; sarr = []
 
     farr = ["MSRpar2012",
@@ -167,8 +158,8 @@ def seq2weight(seq, mask, weight4ind):
     return weight
 
 def weighted_average(We,x1,x2,w1,w2,m):
-    emb1 = get_embedding(We, x1, w1, m)
-    emb2 = get_embedding(We, x2, w2, m)
+    emb1 = get_embeddings(We, x1, w1, m)
+    emb2 = get_embeddings(We, x2, w2, m)
 
     inn = (emb1 * emb2).sum(axis=1)
     emb1norm = np.sqrt((emb1 * emb1).sum(axis=1))
@@ -176,7 +167,7 @@ def weighted_average(We,x1,x2,w1,w2,m):
     scores = inn / emb1norm / emb2norm
     return scores
 
-def get_embedding(We, x, w, m):
+def get_embeddings(We, x, w, m):
     emb = get_weighted_average(We, x, w)
     if  m > 0:
         emb = Denoise_SentenceEmbeddings(emb, m)
@@ -203,18 +194,20 @@ def get_weighted_average(We, x, w):
         emb[i,:] = nonzeroweights.dot(nonzerowordvecs) / np.count_nonzero(w[i,:])
     return emb
 
-
-# In[3]:
-
-
-wordfile = '../data/glove.840B.300d.m.txt'
-weightfile = '../auxiliary_data/enwiki_vocab_min200.txt'
+#to read glove embeddigs
+wordfile = 'data/glove.840B.300d.m.txt'
 (words, We) = getWordmap(wordfile)
 
-
-# In[4]:
+#to read word2vec embeddings uncomment below lines and commnent above above two lines
+# embed_map = word2vec.KeyedVectors.load_word2vec_format('data/GoogleNews-vectors-negative300.bin', binary=True)
+# vocab = embed_map.vocab.keys()
+# words = {}
+# We = []
+# for i in range(len(vocab)):
+#     words[vocab[i]] = i
+#     We.append(embed_map[vocab[i]])
+# We = np.array(We)
 
 
 lnweight4ind = get_localnorm(We)
 parr, sarr = sim_evaluate_all(We, words, lnweight4ind, weighted_average, 5)
-
