@@ -4,6 +4,6 @@ This is an implementation of paper Journey to the center of the words: Word weig
 
 Setup:
 1. Install the python packages in requirements.txt.
-2. Keep the Wordembedding files (GloVe, Wor2Vec) in data folder.
-3. Kepp the STS datasets in datasets folder.
+2. Keep the Word embedding files (GloVe, Wor2Vec) in data folder.
+3. Keep the STS datasets in datasets folder.
 4. Run the localnorm.py file
