@@ -1,0 +1,7 @@
+In case of Glove embeddings:
+Download the GloVe word embeddings from https://nlp.stanford.edu/data/glove.840B.300d.zip
+Unzip the file and place in this data folder
+
+In case of Word2vec embeddings:
+Download the Word2vec embeedings using: wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz"
+Unzip the file and place in this data folder
