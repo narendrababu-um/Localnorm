@@ -27,7 +27,7 @@ def get_localnorm(We):
     G = We.mean(axis=0)
     ln = []
     for v in We:
-        ln.append(distance.cityblock(G,v))
+        ln.append(distance.euclidean(G,v))
     ln = np.array(ln)
     ln = scaler.fit_transform(ln.reshape(-1, 1))
     ln = ln.flatten()
