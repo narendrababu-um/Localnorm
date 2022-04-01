@@ -9,4 +9,4 @@ Setup:
 
 Run:
 1. Simply, run the localnorm.py file. Current code works with Glove embeddigs.
-2. For Word2vec, uncomment lines #201 - #209 and comment out lines #198-#199.
+2. For Word2vec, uncomment lines #201 - #209 and comment out lines #198 - #199.
