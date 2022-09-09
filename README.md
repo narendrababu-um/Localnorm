@@ -4,7 +4,7 @@ This is an implementation of the paper "Journey to the center of the words: Word
 Setup:
 1. Install the python packages given in requirements.txt.
 2. Keep the STS datasets in datasets folder.
-3. Keep the Word embedding files (GloVe, Word2Vec) in data folder. Instructions are given in data folder on how to download them very easily.
+3. Keep the word embedding files (GloVe, Word2Vec) in data folder. Instructions are given in data folder on how to download the word embedding files.
 
 Run:
 1. Simply, run the localnorm.py file. Current code works with Glove embeddigs.
